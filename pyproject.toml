@@ -11,7 +11,8 @@ authors = [
 description = "Processing csv files from S3 for PhotmetricsAI."
 readme = "README.md"
 dependencies = [
+  "boto3",
   "pandas",
   "requests",
-  "pytest"
+  "pytest",
 ]
