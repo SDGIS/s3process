@@ -1,0 +1,9 @@
+services:
+  lambda:
+    build:
+      context: .
+      dockerfile: .Dockerfile
+    volumes:
+      - ../:/code
+    command: /bin/bash
+    env_file: "aws.env"
