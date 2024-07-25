@@ -1,6 +1,6 @@
 # s3process Package
-This package contains three modules: results, events, street-lights which contain
-custom functions to interact with specic data from S3 and use with AWS boto3 lambda and
+This package contains three modules: results, events, street-lights. These modules contain
+custom functions to interact with specific data from S3 and utilize the AWS boto3 lambda and
 scheduler clients.
 
 ### results
