@@ -9,13 +9,14 @@
 # EvariNums and dates within file
 
 
-#____________________________________________________________________________________
+# ____________________________________________________________________________________
 
 
 import requests
 import pandas as pd
 from datetime import datetime
 import pytz
+
 
 # Function Name: get
 # Parameters: S3 url .csv file
@@ -34,6 +35,7 @@ def get(url):
     else:
         print(response.status_code)
         return False
+
 
 # Function Name: process_results
 # Parameters: csv response content from url
@@ -59,7 +61,7 @@ def process_results(csv):
             # Try converting to pandas df or error out
             if len(header_new) == 3:
                 df = pd.DataFrame(data, columns=header_new)
-                return(df)
+                return df
             else:
                 print("Error in csv data, not following EvariNum, Dim, SUM header")
                 return False
@@ -70,6 +72,7 @@ def process_results(csv):
         print("Ouput in df processing")
         print(e)
         return False
+
 
 # Function Name: process_datetime
 # Parameters: List of turn on and turn off times in timezone los angeles
@@ -83,20 +86,21 @@ def process_datetime(data):
     date_aware_data.append(data[0])
 
     # Set timezone for date
-    pst_timezone = pytz.timezone('America/Los_Angeles')
+    pst_timezone = pytz.timezone("America/Los_Angeles")
 
     # Retrieve dawn time, and make it Pacific
-    datetime_obj_dawn = datetime.strptime(data[3] + ' ' + data[4], '%Y-%m-%d %H:%M')
+    datetime_obj_dawn = datetime.strptime(data[3] + " " + data[4], "%Y-%m-%d %H:%M")
     datetime_obj_dawn = pst_timezone.localize(datetime_obj_dawn)
     date_aware_data.append(datetime_obj_dawn)
 
     # Retrieve dusk time, and make it Pacific
-    datetime_obj_dusk = datetime.strptime(data[3] + ' ' + data[5], '%Y-%m-%d %H:%M')
+    datetime_obj_dusk = datetime.strptime(data[3] + " " + data[5], "%Y-%m-%d %H:%M")
     datetime_obj_dusk = pst_timezone.localize(datetime_obj_dusk)
     date_aware_data.append(datetime_obj_dusk)
 
     # Return the time aware datetimes
     return date_aware_data
+
 
 # Function Name: process_hours
 # Parameters: csv response content from url
@@ -116,12 +120,12 @@ def process_hours(csv):
             # Convert data content into arrays using split
             for i in range(1, len(lines)):
                 row_arr = lines[i].split(",")
-                #print(row_arr)
+                # print(row_arr)
                 date_aware_row = process_datetime(row_arr)
                 data.append(date_aware_row)
             # Try converting to pandas df or error out
             df = pd.DataFrame(data, columns=header)
-            return(df)
+            return df
         else:
             print("No output in csv object")
             return False

@@ -5,12 +5,13 @@
 # Description: Connect using env variables of AWS configuration to access boto3
 # lambda function and sceduler cli from AWS
 
-#_____________________________________________________________________________________
+# _____________________________________________________________________________________
 
 
 import boto3
 import datetime as datetime
 import json
+
 
 # Function Name: list_lambda_function
 # Parameters: None
@@ -18,7 +19,7 @@ import json
 # Return: printed list of lambda functions available to user
 def list_lambda_function():
     # Boto3 connection to aws lambda client
-    client = boto3.client('lambda', region_name='us-east-2')
+    client = boto3.client("lambda", region_name="us-east-2")
 
     # Use the paginator to list the functions
     paginator = client.get_paginator("list_functions")
@@ -29,6 +30,7 @@ def list_lambda_function():
     for page in response_iterator:
         for function in page["Functions"]:
             print(f"  {function['FunctionName']}")
+
 
 # Function Name: schedule_event
 # Parameters: time, timezone, lambda_arn, payload, role_arn
@@ -41,7 +43,7 @@ def list_lambda_function():
 # Return: response from sceduler client
 def schedule_event(time, timezone, lambda_arn, payload, role_arn):
     # Boto3 Sceduler client
-    client = boto3.client('scheduler', region_name='us-east-2')
+    client = boto3.client("scheduler", region_name="us-east-2")
 
     # Name of the event REQUIRED
     event_name = "LambdaInvokeEvent"
@@ -55,16 +57,24 @@ def schedule_event(time, timezone, lambda_arn, payload, role_arn):
     flexible_time_window = {"Mode": "OFF"}
 
     # Target payload for "Invoke Lambda" REQUIRED
-    target_json = {"Arn" : lambda_arn, "Input" : json.dumps(payload), "RoleArn" : role_arn}
+    target_json = {"Arn": lambda_arn, "Input": json.dumps(payload), "RoleArn": role_arn}
 
     # State of event after programming - optional
     state = "ENABLED"
 
     # Action after compeltion of event - optional
-    action_complete = 'DELETE'
+    action_complete = "DELETE"
 
     # Display parameters to user for complete API call to sceduler
-    print(event_name, state, action_complete, scedule_time, timezone, flexible_time_window, target_json)
+    print(
+        event_name,
+        state,
+        action_complete,
+        scedule_time,
+        timezone,
+        flexible_time_window,
+        target_json,
+    )
 
     # Trigger scedule creation
     response = client.create_schedule(
@@ -74,7 +84,7 @@ def schedule_event(time, timezone, lambda_arn, payload, role_arn):
         ScheduleExpression=scedule_time,
         ScheduleExpressionTimezone=timezone,
         FlexibleTimeWindow=flexible_time_window,
-        Target=target_json
+        Target=target_json,
     )
 
     # Update user on response
