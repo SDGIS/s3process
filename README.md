@@ -52,3 +52,5 @@ print(response)
 #### Notes
 - Packaged on Docker Image: amd64/amazonlinux:latest using python3 and pyproject.toml
 - Required .env with AWS credentials, lambda arn, role arn, and token for StreetLights
+- Can use files in /docker as an exmaple of required secrets and to build the docker
+environment
