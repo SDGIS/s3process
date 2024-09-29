@@ -15,4 +15,7 @@ dependencies = [
   "pandas",
   "requests",
   "pytest",
+  "timezonefinder",
+  "pysolar",
+  "pytz"
 ]
