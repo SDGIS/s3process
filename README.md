@@ -1,4 +1,4 @@
-# s3process Package
+# s3process Package - Test Access
 This package contains three modules: results, events, street-lights. These modules contain
 custom functions to interact with specific data from S3 and utilize the AWS boto3 lambda and
 scheduler clients.
