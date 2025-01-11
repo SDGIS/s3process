@@ -1,7 +1,7 @@
-# s3process Package - Test Access
-This package contains three modules: results, events, street-lights. These modules contain
-custom functions to interact with specific data from S3 and utilize the AWS boto3 lambda and
-scheduler clients.
+# s3process Package
+This package contains several modules: results, events, street-lights, times, and ubiquita.
+These modules contain custom functions to interact with specific data from S3 and
+utilize the AWS boto3 lambda and event scheduler clients.
 
 ### results
 1. Process results.csv into pandas df (results.csv contains EvariNum, DIM, SUM header)
@@ -48,6 +48,16 @@ response = schedule_event(
 )
 print(response)
 ```
+
+### times
+1. def find_civil_twilight(lat, lon, date, timezone, dem_path=None, .. )
+    return civil_dawn, civil_dusk
+
+This function inputs a lat lon, date, and timezone in order to get the exact civil dusk
+and civil dawn times.
+
+### Ubiquita
+1. Specific Ubiquita functions in order to POST or GET to Ubiquita lights.
 
 #### Notes
 - Packaged on Docker Image: amd64/amazonlinux:latest using python3 and pyproject.toml
