@@ -36,7 +36,7 @@ def post_dimming_level(id, dim, duration):
     api_endpoint = "https://ats-api.smartlinx.tech/api/v2/"
 
     # Retrieve token from env
-    bearer_token = os.environ["TOKEN"]
+    bearer_token = os.environ["SMART_TOKEN"]
 
     # Street Light POST to DIM Route
     # /api/v2/streetlight/{id}/dimminglevel
@@ -122,7 +122,7 @@ def run_request_with_params():
     api_endpoint = "https://ats-api.smartlinx.tech/api/v2/"
 
     # Token initialization
-    bearer_token = os.environ["TOKEN"]
+    bearer_token = os.environ["SMART_TOKEN"]
 
     # Street Light Core Routes
     devices_route = "devices"
