@@ -1,2 +1,3 @@
 src/s3process/__pycache__/
 tests/
+venv/

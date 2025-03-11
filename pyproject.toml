@@ -17,5 +17,6 @@ dependencies = [
   "pytest",
   "timezonefinder",
   "pysolar",
-  "pytz"
+  "pytz",
+  "GDAL==3.10.0"
 ]
